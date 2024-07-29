@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WSDEMO</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<body>
+    <div id="root">
+        <label for="ws">WS</label>
+        <button name="ws" id="ws" class="button">WS</button>
+    </div>
+    <script>
+        function handleWS(event) {
+            let ws = new WebSocket(`ws://${location.host}/ws`);
+            ws.onopen = (event) => {
+                ws.send(
+                    JSON.stringify({
+                        "request-time": Date.UTC.now
+                    })
+                );
+            };
+            ws.onmessage = (event) => {
+                console.log("Data arrived from ws", JSON.parse(event.data)) ;
+            };
+
+            event.preventDefault();
+        }
+
+        document.getElementById('ws').addEventListener('click', handleWS)
+    </script>
+</body>
+
+</html>
