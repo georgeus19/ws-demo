@@ -15,7 +15,7 @@
     </div>
     <script>
         function handleWS(event) {
-            let ws = new WebSocket(`ws://${location.host}/ws`);
+            let ws = new WebSocket(`wss://${location.host}/ws`);
             ws.onopen = (event) => {
                 ws.send(
                     JSON.stringify({
